@@ -25,12 +25,11 @@ import {
   setLoadingPeersAction,
   setErrorPeersAction
 } from "../features/topPeers/redux/actions";
-import { setSuggestionsAction } from "../features/search/redux/actions";
 import {
   ADD_SYMBOL,
-  ADD_SEARCH_INPUT
 } from "../features/search/redux/actionTypes";
-import chartSideEffect from "../features/chart/redux/sideEffect"
+import chartSideEffect from "../features/chart/redux/sideEffect";
+import searchSideEffect from "../features/search/redux/sideEffect"
 
 import io from "socket.io-client";
 
@@ -47,7 +46,6 @@ export const getTopSubscription = (dispatch) => {
     ['StockData', setResponseAction],
     ['CompanyOverview', setCompanyOverviewAction],
     ['LatestNews', setLatestNewsAction],
-    ['suggestions', setSuggestionsAction],
     ['ChartData', setChartDataAction],
     ['TopPeers', addTopPeersAction],
     ['StockError', setErrorKeyStatsAction],
@@ -71,9 +69,11 @@ const stockMiddleware = store => next => {
 
   return action => {
 
-
     const result = next(action);
+
     chartSideEffect(action, store, socket);
+    searchSideEffect(action, store, socket);
+    
     if (action.type === ADD_SYMBOL) {
       socket.emit(
         "symbol",
@@ -86,12 +86,6 @@ const stockMiddleware = store => next => {
       store.dispatch(setLoadingOverviewAction());
       store.dispatch(setLoadingPeersAction());
     } 
-    else if (action.type === ADD_SEARCH_INPUT) {
-      socket.emit("search", store.getState().search.searchInput);
-      socket.on("suggestions", suggestions => {
-        store.dispatch(setSuggestionsAction(suggestions));
-      });
-    }
     return result;
   };;
 };

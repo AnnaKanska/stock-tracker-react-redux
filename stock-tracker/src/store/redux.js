@@ -37,6 +37,34 @@ import io from "socket.io-client";
 
 const socket = io(`http://${window.location.hostname}:5000`);
 
+const getSocketSubscription = (event, fn) => {
+  socket.on(event, fn);
+  return () => socket.off(fn);
+}
+
+export const getTopSubscription = (dispatch) => {
+  const unsubscribeFns = [
+    ['StockData', setResponseAction],
+    ['CompanyOverview', setCompanyOverviewAction],
+    ['LatestNews', setLatestNewsAction],
+    ['suggestions', setSuggestionsAction],
+    ['ChartData', setChartDataAction],
+    ['TopPeers', addTopPeersAction],
+    ['StockError', setErrorKeyStatsAction],
+    ['CompanyOverviewError', setErrorOverviewAction],
+    ['LatestNewsError', setErrorNewsAction],
+    ['ChartDataError', setChartErrorAction],
+    ['TopPeersError', setErrorPeersAction]
+  ].map(
+    ([event, actionCreator]) =>
+      getSocketSubscription(event, payload => dispatch(actionCreator(payload)))
+  );
+
+  return () => unsubscribeFns.forEach(fn => fn());
+
+}
+
+
 const stockMiddleware = store => next => action => {
   const result = next(action);
   if (action.type === ADD_SYMBOL) {
@@ -68,39 +96,6 @@ const stockMiddleware = store => next => action => {
 const initialStartupMiddlware = store => next => action => {
   if (action.type === INITIAL_STARTUP) {
     console.log("Application has started ");
-    socket.on("StockData", data => {
-      store.dispatch(setResponseAction(data));
-    });
-    socket.on("CompanyOverview", overview => {
-      store.dispatch(setCompanyOverviewAction(overview));
-    });
-    socket.on("LatestNews", news => {
-      store.dispatch(setLatestNewsAction(news));
-    });
-    socket.on("ChartData", chartData => {
-      store.dispatch(setChartDataAction(chartData));
-    });
-    socket.on("TopPeers", peers => {
-      store.dispatch(addTopPeersAction(peers));
-    });
-    socket.on("StockError", error => {
-      store.dispatch(setErrorKeyStatsAction("stockData", error));
-    });
-    // socket.on("CompaniesError", error => {
-    //   store.dispatch(getErrorsAction("companies", error));
-    // });
-    socket.on("CompanyOverviewError", error => {
-      store.dispatch(setErrorOverviewAction("companyOverview", error));
-    });
-    socket.on("LatestNewsError", error => {
-      store.dispatch(setErrorNewsAction("latestNews", error));
-    });
-    socket.on("ChartDataError", error => {
-      store.dispatch(setChartErrorAction("chartData", error));
-    });
-    socket.on("TopPeersError", error => {
-      store.dispatch(setErrorPeersAction("topPeers", error));
-    });
   }
   const result = next(action);
   return result;

@@ -10,7 +10,7 @@ const HALF_DAY = DAY_IN_MS / 2;
 
 function callNowAndInterval(fn, interval, ...args) {
   fn(...args);
-  return setInterval(() => fn(...args), interval);
+  return setInterval(fn, interval, ...args);
 }
 
 const HANDLE_DATA = (socket) => {

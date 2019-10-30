@@ -1,66 +1,18 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import { rootReducer } from "./rootReducer";
-import {
-  setChartDataAction,
-  setChartLoadingAction,
-  setChartErrorAction
-} from "../features/chart/redux/actions";
-import {
-  setCompanyOverviewAction,
-  setLoadingOverviewAction,
-  setErrorOverviewAction
-} from "../features/overview/redux/actions";
-import {
-  setLatestNewsAction,
-  setLoadingNewsAction,
-  setErrorNewsAction
-} from "../features/latestNews/redux/actions";
-import {
-  setResponseAction,
-  setLoadingKeyStatsAction,
-  setErrorKeyStatsAction
-} from "../features/keyStats/redux/actions";
-import {
-  addTopPeersAction,
-  setLoadingPeersAction,
-  setErrorPeersAction
-} from "../features/topPeers/redux/actions";
-import {
-  ADD_SYMBOL,
-} from "../features/search/redux/actionTypes";
+import { setChartLoadingAction } from "../features/chart/redux/actions";
+import { setLoadingOverviewAction } from "../features/overview/redux/actions";
+import { setLoadingNewsAction } from "../features/latestNews/redux/actions";
+import { setLoadingKeyStatsAction } from "../features/keyStats/redux/actions";
+import { setLoadingPeersAction } from "../features/topPeers/redux/actions";
+import { ADD_SYMBOL } from "../features/search/redux/actionTypes";
 import chartSideEffect from "../features/chart/redux/sideEffect";
 import searchSideEffect from "../features/search/redux/sideEffect"
 
 import io from "socket.io-client";
 
-const socket = io(`http://${window.location.hostname}:5000`);
+export const socket = io(`http://${window.location.hostname}:5000`);
 
-const getSocketSubscription = (event, fn) => {
-  socket.on(event, fn);
-  const unsubscribeFn = () => socket.off(fn);
-  return unsubscribeFn
-}
-
-export const getTopSubscription = (dispatch) => {
-  const unsubscribeFns = [
-    ['StockData', setResponseAction],
-    ['CompanyOverview', setCompanyOverviewAction],
-    ['LatestNews', setLatestNewsAction],
-    ['ChartData', setChartDataAction],
-    ['TopPeers', addTopPeersAction],
-    ['StockError', setErrorKeyStatsAction],
-    ['CompanyOverviewError', setErrorOverviewAction],
-    ['LatestNewsError', setErrorNewsAction],
-    ['ChartDataError', setChartErrorAction],
-    ['TopPeersError', setErrorPeersAction]
-  ].map(
-    ([event, actionCreator]) =>
-      getSocketSubscription(event, payload => dispatch(actionCreator(payload)))
-  );
-
-  return () => unsubscribeFns.forEach(fn => fn());
-
-}
 
 
 const stockMiddleware = store => next => {
@@ -73,7 +25,7 @@ const stockMiddleware = store => next => {
 
     chartSideEffect(action, store, socket);
     searchSideEffect(action, store, socket);
-    
+
     if (action.type === ADD_SYMBOL) {
       socket.emit(
         "symbol",

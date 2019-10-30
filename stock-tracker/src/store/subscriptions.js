@@ -27,7 +27,7 @@ const getSocketSubscription = (event, fn) => {
     return unsubscribeFn
   }
   
-  export const getTopSubscription = (dispatch) => {
+const getTopSubscription = (dispatch) => {
     const unsubscribeFns = [
       ['StockData', setResponseAction],
       ['CompanyOverview', setCompanyOverviewAction],
@@ -47,3 +47,5 @@ const getSocketSubscription = (event, fn) => {
     return () => unsubscribeFns.forEach(fn => fn());
   
   }
+
+  export default getTopSubscription

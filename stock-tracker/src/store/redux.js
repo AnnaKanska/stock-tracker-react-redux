@@ -8,6 +8,7 @@ import { setLoadingPeersAction } from "../features/topPeers/redux/actions";
 import { ADD_SYMBOL } from "../features/search/redux/actionTypes";
 import chartSideEffect from "../features/chart/redux/sideEffect";
 import searchSideEffect from "../features/search/redux/sideEffect"
+import getTopSubscription from "./subscriptions"
 
 import io from "socket.io-client";
 
@@ -16,8 +17,7 @@ export const socket = io(`http://${window.location.hostname}:5000`);
 
 
 const stockMiddleware = store => next => {
-  // startup things
-  // getTopSubscription(store.dispatch)
+getTopSubscription(store.dispatch)
 
   return action => {
 

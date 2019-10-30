@@ -30,8 +30,7 @@ import {
   ADD_SYMBOL,
   ADD_SEARCH_INPUT
 } from "../features/search/redux/actionTypes";
-import { SET_CHART_TIME } from "../features/chart/redux/actionTypes";
-import { INITIAL_STARTUP } from "../store/actionTypes";
+import chartSideEffect from "../features/chart/redux/sideEffect"
 
 import io from "socket.io-client";
 
@@ -39,7 +38,8 @@ const socket = io(`http://${window.location.hostname}:5000`);
 
 const getSocketSubscription = (event, fn) => {
   socket.on(event, fn);
-  return () => socket.off(fn);
+  const unsubscribeFn = () => socket.off(fn);
+  return unsubscribeFn
 }
 
 export const getTopSubscription = (dispatch) => {
@@ -65,40 +65,35 @@ export const getTopSubscription = (dispatch) => {
 }
 
 
-const stockMiddleware = store => next => action => {
-  const result = next(action);
-  if (action.type === ADD_SYMBOL) {
-    socket.emit(
-      "symbol",
-      store.getState().search.symbol,
-      store.getState().chart.chartTime
-    );
-    store.dispatch(setChartLoadingAction());
-    store.dispatch(setLoadingKeyStatsAction());
-    store.dispatch(setLoadingNewsAction());
-    store.dispatch(setLoadingOverviewAction());
-    store.dispatch(setLoadingPeersAction());
-  } else if (action.type === SET_CHART_TIME) {
-    socket.emit(
-      "chartTime",
-      store.getState().search.symbol,
-      store.getState().chart.chartTime
-    );
-  } else if (action.type === ADD_SEARCH_INPUT) {
-    socket.emit("search", store.getState().search.searchInput);
-    socket.on("suggestions", suggestions => {
-      store.dispatch(setSuggestionsAction(suggestions));
-    });
-  }
-  return result;
-};
+const stockMiddleware = store => next => {
+  // startup things
+  // getTopSubscription(store.dispatch)
 
-const initialStartupMiddlware = store => next => action => {
-  if (action.type === INITIAL_STARTUP) {
-    console.log("Application has started ");
-  }
-  const result = next(action);
-  return result;
+  return action => {
+
+
+    const result = next(action);
+    chartSideEffect(action, store, socket);
+    if (action.type === ADD_SYMBOL) {
+      socket.emit(
+        "symbol",
+        store.getState().search.symbol,
+        store.getState().chart.chartTime
+      );
+      store.dispatch(setChartLoadingAction());
+      store.dispatch(setLoadingKeyStatsAction());
+      store.dispatch(setLoadingNewsAction());
+      store.dispatch(setLoadingOverviewAction());
+      store.dispatch(setLoadingPeersAction());
+    } 
+    else if (action.type === ADD_SEARCH_INPUT) {
+      socket.emit("search", store.getState().search.searchInput);
+      socket.on("suggestions", suggestions => {
+        store.dispatch(setSuggestionsAction(suggestions));
+      });
+    }
+    return result;
+  };;
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -106,5 +101,5 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(
   rootReducer,
   undefined,
-  composeEnhancers(applyMiddleware(initialStartupMiddlware, stockMiddleware))
+  composeEnhancers(applyMiddleware(stockMiddleware))
 );

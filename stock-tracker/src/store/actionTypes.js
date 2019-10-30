@@ -1,1 +1,0 @@
-export const INITIAL_STARTUP = "INITIAL_STARTUP";

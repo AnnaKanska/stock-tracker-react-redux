@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { initialStartupAction } from "./store/actions";
 import ReactDOM from "react-dom";
 import "./assets/styles/index.css";
 import App from "./App";
@@ -12,6 +11,7 @@ const Root = () => {
     const unsubscribe = getTopSubscription(store.dispatch);
     return unsubscribe;
   }, []);
+
   return (
   <Provider store={store}>
     <App />
@@ -21,8 +21,7 @@ const Root = () => {
 
 ReactDOM.render(
   <Root />,
-  document.getElementById("root"),
-  () => store.dispatch(initialStartupAction())
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

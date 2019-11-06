@@ -5,6 +5,8 @@ export const CurrencyDisplay = () => {
   const response = useSelector(state => state.keyStats.response);
   const overview = useSelector(state => state.overview.companyOverview);
 
+  console.log(response, overview);
+
   return (
     <div className={response ? "currency_display" : "hidden"}>
       <ul>

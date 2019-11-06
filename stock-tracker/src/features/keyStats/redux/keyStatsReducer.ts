@@ -4,13 +4,21 @@ import {
   SET_ERROR_KEYSTATS
 } from "./actionTypes";
 
-const initialState = {
+import { Action } from "../../../types";
+
+interface KeyStatsState {
+  response: any;
+  loading: boolean;
+  error: boolean;
+}
+
+const initialState: KeyStatsState = {
   response: false,
   loading: false,
   error: false
 };
 
-export const keyStatsReducer = (state = initialState, action) => {
+export const keyStatsReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case SET_LOADING_KEYSTATS:
       return {
@@ -34,3 +42,5 @@ export const keyStatsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+keyStatsReducer(initialState, { type: "hey", payload: 234 });

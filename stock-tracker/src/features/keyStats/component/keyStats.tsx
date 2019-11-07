@@ -3,15 +3,12 @@ import { useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import "./KeyStats.css";
-// import { KeyStatsState } from "../redux/keyStatsReducer"
+import { AppState } from "../../../store/rootReducer";
 
 export const KeyStats = () => {
-  const response = useSelector(state => state.keyStats.response);
-  const loading = useSelector(state => state.keyStats.loading);
-  const error = useSelector(state => state.keyStats.error);
-  // const { response, loading, error } = useSelector(
-  //   (state: KeyStatsState) => state.keyStats
-  // )
+  const { response, loading, error } = useSelector(
+    (state: AppState) => state.keyStats
+  );
 
   function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -33,25 +30,25 @@ export const KeyStats = () => {
                   Previous Close
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {response.previousClose
-                    ? Math.abs(response.previousClose.toFixed(2))
+                  {response && response.previousClose
+                    ? Math.abs(response.previousClose).toFixed(2)
                     : "N/A"}
                 </td>
               </tr>
               <tr>
                 <td className="keystats__grid__display1__name">Day Range</td>
                 <td className="keystats__grid__display1__value">
-                  {response.high && response.low
-                    ? Math.abs(response.high.toFixed(2)) +
+                  {response && response.high && response.low
+                    ? Math.abs(response.high).toFixed(2) +
                       "-" +
-                      Math.abs(response.low.toFixed(2))
+                      Math.abs(response.low).toFixed(2)
                     : "N/A"}
                 </td>
               </tr>
               <tr>
                 <td className="keystats__grid__display1__name">Volume</td>
                 <td className="keystats__grid__display1__value">
-                  {response.previousVolume
+                  {response && response.previousVolume
                     ? numberWithCommas(response.previousVolume)
                     : "N/A"}
                 </td>
@@ -59,7 +56,7 @@ export const KeyStats = () => {
               <tr>
                 <td className="keystats__grid__display1__name">Market Cap</td>
                 <td className="keystats__grid__display1__value">
-                  {response.marketCap
+                  {response && response.marketCap
                     ? numberWithCommas(response.marketCap)
                     : "N/A"}
                 </td>
@@ -67,8 +64,8 @@ export const KeyStats = () => {
               <tr>
                 <td className="keystats__grid__display1__name">P/E Ratio</td>
                 <td className="keystats__grid__display1__value">
-                  {response.peRatio
-                    ? Math.abs(response.peRatio.toFixed(2))
+                  {response && response.peRatio
+                    ? Math.abs(response.peRatio).toFixed(2)
                     : "N/A"}
                 </td>
               </tr>
@@ -79,7 +76,9 @@ export const KeyStats = () => {
               <tr>
                 <td className="keystats__grid__display1__name">Open</td>
                 <td className="keystats__grid__display1__value">
-                  {response.open ? Math.abs(response.open.toFixed(2)) : "N/A"}
+                  {response && response.open
+                    ? Math.abs(response.open).toFixed(2)
+                    : "N/A"}
                 </td>
               </tr>
               <tr>
@@ -87,10 +86,10 @@ export const KeyStats = () => {
                   52 Week Range
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {response.week52High && response.week52Low
-                    ? Math.abs(response.week52High.toFixed(2)) +
+                  {response && response.week52High && response.week52Low
+                    ? Math.abs(response.week52High).toFixed(2) +
                       "-" +
-                      Math.abs(response.week52Low.toFixed(2))
+                      Math.abs(response.week52Low).toFixed(2)
                     : "N/A"}
                 </td>
               </tr>
@@ -99,7 +98,7 @@ export const KeyStats = () => {
                   Total Avg Volume
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {response.avgTotalVolume
+                  {response && response.avgTotalVolume
                     ? numberWithCommas(response.avgTotalVolume)
                     : "N/A"}
                 </td>
@@ -109,7 +108,9 @@ export const KeyStats = () => {
                   Earning Per Share
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {response.earningsPShare ? response.earningsPShare : "N/A"}
+                  {response && response.earningsPerShare
+                    ? response.earningsPerShare
+                    : "N/A"}
                 </td>
               </tr>
               <tr>
@@ -117,8 +118,8 @@ export const KeyStats = () => {
                   Dividend & Yield
                 </td>
                 <td className="keystats__grid__display1__value">
-                  {response.ytdChange
-                    ? Math.abs(response.ytdChange.toFixed(2)) + "%"
+                  {response && response.ytdChange
+                    ? Math.abs(response.ytdChange).toFixed(2) + "%"
                     : "N/A"}
                 </td>
               </tr>

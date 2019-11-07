@@ -3,22 +3,26 @@ import {
   SET_LOADING_KEYSTATS,
   SET_ERROR_KEYSTATS
 } from "./actionTypes";
-
-import { Action } from "../../../types";
+import { Reducer } from "redux";
+import { KeyStatsActions } from "./actions";
+import { Response } from "./actions";
 
 export interface KeyStatsState {
-  response: any;
+  response?: Response;
   loading: boolean;
   error: boolean;
 }
 
 const initialState: KeyStatsState = {
-  response: false,
+  response: undefined,
   loading: false,
   error: false
 };
 
-export const keyStatsReducer = (state = initialState, action: Action) => {
+export const keyStatsReducer: Reducer<KeyStatsState, KeyStatsActions> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case SET_LOADING_KEYSTATS:
       return {
@@ -42,5 +46,3 @@ export const keyStatsReducer = (state = initialState, action: Action) => {
       return state;
   }
 };
-
-keyStatsReducer(initialState, { type: "hey", payload: 234 });

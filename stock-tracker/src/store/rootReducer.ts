@@ -14,3 +14,5 @@ export const rootReducer = combineReducers({
   search: searchReducer,
   peers: peersReducer
 });
+
+export type AppState = ReturnType<typeof rootReducer>;

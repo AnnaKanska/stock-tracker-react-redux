@@ -4,11 +4,12 @@ import Loading from "../../loading/component/loading";
 import { TopPeers } from "../../topPeers";
 import ErrorMessage from "../../error/error";
 import "./Overview.css";
+import { AppState } from "../../../store/rootReducer";
 
 export const Overview = () => {
-  const overview = useSelector(state => state.overview.companyOverview);
-  const loading = useSelector(state => state.overview.loading);
-  const error = useSelector(state => state.overview.error);
+  const { companyOverview, loading, error } = useSelector(
+    (state: AppState) => state.overview
+  );
 
   return (
     <div className="overview">
@@ -19,21 +20,21 @@ export const Overview = () => {
         <Loading />
       ) : (
         <>
-          <h2 className={overview ? "overview__company" : "hidden"}>
-            {overview.companyName} ({overview.symbol})
+          <h2 className={companyOverview ? "overview__company" : "hidden"}>
+            {companyOverview.companyName} ({companyOverview.symbol})
           </h2>
           <p>
             {" "}
             <a
               rel="noopener noreferrer"
               className="overview__web"
-              href={overview.website}
+              href={companyOverview.website}
               target="_blank"
             >
-              {overview.website}
+              {companyOverview.website}
             </a>
           </p>
-          <p className="overview__text">{overview.description}</p>
+          <p className="overview__text">{companyOverview.description}</p>
         </>
       )}
       <TopPeers />

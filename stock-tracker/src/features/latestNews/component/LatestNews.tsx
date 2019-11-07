@@ -4,11 +4,12 @@ import Loading from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import "./LatestNews.css";
 import moment from "moment";
+import { AppState } from "../../../store/rootReducer";
 
 export const LatestNews = () => {
-  const latestNews = useSelector(state => state.news.latestNews);
-  const loading = useSelector(state => state.news.loading);
-  const error = useSelector(state => state.news.error);
+  const { latestNews, loading, error } = useSelector(
+    (state: AppState) => state.news
+  );
 
   const newsDisplay = latestNews.map((news, index) => (
     <div className="news" key={index}>

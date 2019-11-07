@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSymbolAction, setSearchInputAction } from "../redux/actions";
 import { Icon } from "antd";
 import "./Search.css";
+// import { AppState } from "../../../store/rootReducer";
 
 export const Search = () => {
   const [symbol, setSymbol] = useState("");
@@ -20,6 +21,7 @@ export const Search = () => {
   );
   const suggestions = useSelector(state => state.search.suggestions);
   const response = useSelector(state => state.keyStats.response);
+
   const handleSubmit = e => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -90,7 +92,7 @@ export const Search = () => {
           htmlFor="search_display__search_bar"
         >
           {" "}
-          {response.companyName}
+          {response && response.companyName}
           <span className="search_display__search_bar__label__symbol">
             {labelSymbol}
           </span>

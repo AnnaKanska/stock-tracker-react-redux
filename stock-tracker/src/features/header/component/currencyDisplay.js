@@ -18,12 +18,12 @@ export const CurrencyDisplay = () => {
         </li>
         <li
           className={
-            response.currency
+            response && response.currency
               ? "currency_display__item currency_display__item__currency"
               : "hidden"
           }
         >
-          {response.currency}
+          {response && response.currency}
         </li>
       </ul>
     </div>

@@ -3,13 +3,17 @@ import { useSelector } from "react-redux";
 import Loading from "../../loading/component/loading";
 import ErrorMessage from "../../error/error";
 import "./KeyStats.css";
+// import { KeyStatsState } from "../redux/keyStatsReducer"
 
 export const KeyStats = () => {
   const response = useSelector(state => state.keyStats.response);
   const loading = useSelector(state => state.keyStats.loading);
   const error = useSelector(state => state.keyStats.error);
+  // const { response, loading, error } = useSelector(
+  //   (state: KeyStatsState) => state.keyStats
+  // )
 
-  function numberWithCommas(x) {
+  function numberWithCommas(x: number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 

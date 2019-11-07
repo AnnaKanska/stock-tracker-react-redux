@@ -64,6 +64,7 @@ const getStockDataAndEmit = async (socket, stockSymbol) => {
       latestUpdate,
       isUSMarketOpen
     };
+    console.log("!!", stockData);
     console.info("Stock data is being sent");
     socket.emit("StockData", { data: stockData }); // Emitting a new message. It will be consumed by the client
   } catch (error) {

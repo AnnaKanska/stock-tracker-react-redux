@@ -6,7 +6,7 @@ import {
 
 import { Action } from "../../../types";
 
-interface KeyStatsState {
+export interface KeyStatsState {
   response: any;
   loading: boolean;
   error: boolean;

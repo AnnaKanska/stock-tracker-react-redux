@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import { combineReducers, AnyAction } from "redux";
 import { chartReducer } from "../features/chart";
 import { keyStatsReducer } from "../features/keyStats/redux/keyStatsReducer";
 import { newsReducer } from "../features/latestNews";

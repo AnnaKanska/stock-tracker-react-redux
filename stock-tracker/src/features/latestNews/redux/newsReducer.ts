@@ -1,10 +1,10 @@
 import { SET_NEWS, SET_LOADING_NEWS, SET_ERROR_NEWS } from "./actionTypes";
-import { LatestNews } from "./actions";
+import { LatestNewsType } from "./actions";
 import { LatestNewsActions } from "./actions";
-import { Reducer } from "react";
+import { Reducer } from "redux";
 
-interface NewsState {
-  latestNews?: LatestNews;
+export interface NewsState {
+  latestNews?: LatestNewsType;
   loading: boolean;
   error: boolean;
 }
@@ -22,7 +22,7 @@ export const newsReducer: Reducer<NewsState, LatestNewsActions> = (
   switch (action.type) {
     case SET_LOADING_NEWS:
       return {
-        ...initialState,
+        ...state,
         loading: true
       };
     case SET_NEWS:

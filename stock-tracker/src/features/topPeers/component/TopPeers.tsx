@@ -8,7 +8,7 @@ import { AppState } from "../../../store/rootReducer";
 
 export const TopPeers = () => {
   const { topPeers, loading, error } = useSelector(
-    (state: AppState) => state.peers
+    (state: AppState) => state.topPeers
   );
 
   const dispatch = useDispatch();

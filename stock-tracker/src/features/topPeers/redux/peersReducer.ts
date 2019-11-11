@@ -4,7 +4,7 @@ import {
   SET_ERROR_PEERS
 } from "./actionTypes";
 import { TopPeersType, TopPeersActions } from "./actions";
-import { Reducer } from "react";
+import { Reducer } from "redux";
 
 export interface TopPeersState {
   topPeers: TopPeersType;

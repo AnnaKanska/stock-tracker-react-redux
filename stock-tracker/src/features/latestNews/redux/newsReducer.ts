@@ -1,10 +1,10 @@
 import { SET_NEWS, SET_LOADING_NEWS, SET_ERROR_NEWS } from "./actionTypes";
-import { LatestNewsType } from "./actions";
+import { NewsType } from "./actions";
 import { LatestNewsActions } from "./actions";
 import { Reducer } from "redux";
 
 export interface NewsState {
-  latestNews: LatestNewsType[];
+  latestNews: NewsType[];
   loading: boolean;
   error: boolean;
 }

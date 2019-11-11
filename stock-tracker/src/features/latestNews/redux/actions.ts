@@ -1,20 +1,18 @@
 import { SET_NEWS, SET_LOADING_NEWS, SET_ERROR_NEWS } from "./actionTypes";
 import { Action, ActionPayload } from "../../../types";
 
-export interface LatestNewsType {
+export interface NewsType {
   url: string;
   headline: string;
   source: string;
   datetime: string;
 }
 
-type SetLatestNews = ActionPayload<typeof SET_NEWS, LatestNewsType[]>;
+type SetLatestNews = ActionPayload<typeof SET_NEWS, NewsType[]>;
 type SetLoading = Action<typeof SET_LOADING_NEWS>;
 type SetError = Action<typeof SET_ERROR_NEWS>;
 
-export const setLatestNewsAction = (
-  latestNews: LatestNewsType[]
-): SetLatestNews => ({
+export const setLatestNewsAction = (latestNews: NewsType[]): SetLatestNews => ({
   type: SET_NEWS,
   payload: latestNews
 });

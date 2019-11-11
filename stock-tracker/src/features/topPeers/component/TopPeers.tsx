@@ -4,17 +4,20 @@ import Loading from "../../loading/component/loading";
 import { setSymbolAction } from "../../search/redux/actions";
 import ErrorMessage from "../../error/error";
 import "./TopPeers.css";
+import { AppState } from "../../../store/rootReducer";
 
 export const TopPeers = () => {
-  const peers = useSelector(state => state.peers.topPeers);
-  const loading = useSelector(state => state.peers.loading);
-  const error = useSelector(state => state.peers.error);
-  const dispatch = useDispatch();
-  const addSymbol = useCallback(symbol => dispatch(setSymbolAction(symbol)), [
-    dispatch
-  ]);
+  const { topPeers, loading, error } = useSelector(
+    (state: AppState) => state.peers
+  );
 
-  const handleClick = data => () => {
+  const dispatch = useDispatch();
+  const addSymbol = useCallback(
+    (symbol: string) => dispatch(setSymbolAction(symbol)),
+    [dispatch]
+  );
+
+  const handleClick = (data: string) => () => {
     addSymbol(data);
   };
 
@@ -27,7 +30,7 @@ export const TopPeers = () => {
         <Loading />
       ) : (
         <ul>
-          {peers.map((data, index) => (
+          {topPeers.map((data, index) => (
             <li onClick={handleClick(data)} key={index}>
               {data}
             </li>

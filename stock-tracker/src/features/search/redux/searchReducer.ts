@@ -4,15 +4,27 @@ import {
   ADD_SUGGESTIONS,
   SET_ERROR_SEARCH
 } from "./actionTypes";
+import { Reducer } from "redux";
+import { SearchActions } from "./actions";
+
+export interface SearchState {
+  symbol: string;
+  searchInput: string;
+  suggestions: string | undefined;
+  error: boolean;
+}
 
 const initialState = {
   symbol: "",
   searchInput: "",
-  suggestions: false,
+  suggestions: undefined,
   error: false
 };
 
-export const searchReducer = (state = initialState, action) => {
+export const searchReducer: Reducer<SearchState, SearchActions> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case ADD_SYMBOL:
       return {

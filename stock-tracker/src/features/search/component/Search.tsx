@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSymbolAction, setSearchInputAction } from "../redux/actions";
 import { Icon } from "antd";
 import "./Search.css";
-// import { AppState } from "../../../store/rootReducer";
+import { AppState } from "../../../store/rootReducer";
 
 export const Search = () => {
   const [symbol, setSymbol] = useState("");
@@ -12,15 +12,18 @@ export const Search = () => {
   const searchRef = useRef(null);
   const dispatch = useDispatch();
 
-  const addSymbol = useCallback(symbol => dispatch(setSymbolAction(symbol)), [
-    dispatch
-  ]);
+  const addSymbol = useCallback(
+    (symbol: string) => dispatch(setSymbolAction(symbol)),
+    [dispatch]
+  );
   const addSearchInput = useCallback(
     searchInput => dispatch(setSearchInputAction(searchInput)),
     [dispatch]
   );
-  const suggestions = useSelector(state => state.search.suggestions);
-  const response = useSelector(state => state.keyStats.response);
+  const suggestions = useSelector(
+    (state: AppState) => state.search.suggestions
+  );
+  const response = useSelector((state: AppState) => state.keyStats.response);
 
   const handleSubmit = e => {
     if (e.key === "Enter") {

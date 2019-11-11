@@ -16,6 +16,7 @@ import { SuggestionType } from "../redux/actions";
 export const Search = () => {
   const [symbol, setSymbol] = useState("");
   const [open, setOpen] = useState(false);
+  // useref-a way to get out of react to dom
   const dropdownRef = useRef<HTMLTableElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
@@ -33,7 +34,9 @@ export const Search = () => {
   );
   const response = useSelector((state: AppState) => state.keyStats.response);
 
-  const handleSubmit: KeyboardEventHandler<HTMLInputElement> = e => {
+  // const keyPressHandler = (e: KeyboardEventHandler<HTMLInputElement>)
+
+  const keyPressHandler: KeyboardEventHandler<HTMLInputElement> = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (symbol.trim() === "") return;
@@ -53,7 +56,6 @@ export const Search = () => {
   };
   const handleBlur = () => {
     requestAnimationFrame(() => {
-      //                                                                why the error case is needed
       if (!dropdownRef.current || !searchRef.current) {
         throw Error("Reference has not been defined yet!");
       }
@@ -103,7 +105,7 @@ export const Search = () => {
           type="text"
           value={symbol}
           onChange={onChange}
-          onKeyPress={handleSubmit}
+          onKeyPress={keyPressHandler}
           onBlur={handleBlur}
           ref={searchRef}
           autoComplete="off"

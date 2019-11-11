@@ -17,21 +17,26 @@ import ErrorMessage from "../../error/error";
 import { ChartButton } from "./chartButton";
 import "./chart.css";
 import moment from "moment";
+import { AppState } from "../../../store/rootReducer";
 
 export const Chart = () => {
   const dispatch = useDispatch();
-  const chartData = useSelector(state => state.chart.chartData);
-  const loading = useSelector(state => state.chart.loading);
+  const { chartData, loading, error } = useSelector(
+    (state: AppState) => state.chart
+  );
+
   const [current, setCurrent] = useState("1Y");
+
   const onClick = e => {
     dispatch(setChartTimeAction(e.target.value));
     setCurrent(e.target.value);
   };
+
   const latestValue =
     chartData[chartData.length - 1] !== undefined
       ? chartData[chartData.length - 1].close
       : "";
-  const error = useSelector(state => state.chart.error);
+
   const formatDate = tickItem => {
     switch (current) {
       case "1D":

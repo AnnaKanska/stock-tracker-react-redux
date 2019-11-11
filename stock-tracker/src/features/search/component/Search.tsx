@@ -1,15 +1,23 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  KeyboardEventHandler,
+  ChangeEventHandler
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSymbolAction, setSearchInputAction } from "../redux/actions";
 import { Icon } from "antd";
 import "./Search.css";
 import { AppState } from "../../../store/rootReducer";
+import { SuggestionType } from "../redux/actions";
 
 export const Search = () => {
   const [symbol, setSymbol] = useState("");
   const [open, setOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const searchRef = useRef(null);
+  const dropdownRef = useRef<HTMLTableElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
   const addSymbol = useCallback(
@@ -25,7 +33,7 @@ export const Search = () => {
   );
   const response = useSelector((state: AppState) => state.keyStats.response);
 
-  const handleSubmit = e => {
+  const handleSubmit: KeyboardEventHandler<HTMLInputElement> = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (symbol.trim() === "") return;
@@ -34,17 +42,21 @@ export const Search = () => {
       setSymbol("");
     }
   };
-  const onChange = e => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = e => {
     setSymbol(e.target.value);
     addSearchInput(e.target.value);
   };
-  const onClick = data => {
+  const onClick = (data: SuggestionType) => {
     addSymbol(data.symbol);
     setOpen(false);
     setSymbol("");
   };
   const handleBlur = () => {
     requestAnimationFrame(() => {
+      //                                                                why the error case is needed
+      if (!dropdownRef.current || !searchRef.current) {
+        throw Error("Reference has not been defined yet!");
+      }
       if (
         !dropdownRef.current.contains(document.activeElement) &&
         !searchRef.current.contains(document.activeElement)
@@ -55,11 +67,17 @@ export const Search = () => {
       }
     });
   };
+
   const labelSymbol = response ? ` (${response.symbol})` : "";
+
   useEffect(() => {
-    setOpen(symbol !== "" && suggestions.length !== 0);
+    setOpen(
+      suggestions !== undefined && symbol !== "" && suggestions.length !== 0
+    );
   }, [suggestions, symbol]);
+
   const suggestionItems =
+    suggestions &&
     suggestions.length > 0 &&
     suggestions.map(data => {
       return (
@@ -103,7 +121,7 @@ export const Search = () => {
       </div>
       <table
         ref={dropdownRef}
-        tabIndex="-1"
+        tabIndex={-1}
         className="search_display__suggestion_list"
         style={{ display: open ? "block" : "none" }}
       >

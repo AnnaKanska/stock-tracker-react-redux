@@ -6,9 +6,14 @@ import {
 } from "./actionTypes";
 import { Action, ActionPayload } from "../../../types";
 
+export type SuggestionType = {
+  symbol: string;
+  name: string;
+  exchange: string;
+};
 type SetSymbol = ActionPayload<typeof ADD_SYMBOL, string>;
 type SetSearch = ActionPayload<typeof ADD_SEARCH_INPUT, string>;
-type SetSuggestions = ActionPayload<typeof ADD_SUGGESTIONS, string>;
+type SetSuggestions = ActionPayload<typeof ADD_SUGGESTIONS, SuggestionType[]>;
 type SetError = Action<typeof SET_ERROR_SEARCH>;
 
 export const setSymbolAction = (symbol: string): SetSymbol => ({
@@ -21,7 +26,9 @@ export const setSearchInputAction = (searchInput: string): SetSearch => ({
   payload: searchInput
 });
 
-export const setSuggestionsAction = (suggestions: string): SetSuggestions => ({
+export const setSuggestionsAction = (
+  suggestions: SuggestionType[]
+): SetSuggestions => ({
   type: ADD_SUGGESTIONS,
   payload: suggestions
 });

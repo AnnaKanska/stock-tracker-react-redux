@@ -5,12 +5,12 @@ import {
   SET_ERROR_SEARCH
 } from "./actionTypes";
 import { Reducer } from "redux";
-import { SearchActions } from "./actions";
+import { SearchActions, SuggestionType } from "./actions";
 
 export interface SearchState {
   symbol: string;
   searchInput: string;
-  suggestions: string | undefined;
+  suggestions?: SuggestionType[];
   error: boolean;
 }
 

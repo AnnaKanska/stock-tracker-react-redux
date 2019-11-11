@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Icon } from "antd";
+import { AppState } from "../../../store/rootReducer";
 
 export const PriceDisplay = () => {
-  const response = useSelector(state => state.keyStats.response);
+  const response = useSelector((state: AppState) => state.keyStats.response);
 
   return (
     <div className="price_display">
@@ -23,7 +24,7 @@ export const PriceDisplay = () => {
           type={response && response.change < 0 ? "arrow-down" : "arrow-up"}
         />
         {response && response.change
-          ? Math.abs(response.change.toFixed(2))
+          ? Math.abs(response.change).toFixed(2)
           : ""}{" "}
         <span className="separator">|</span>
       </h4>
@@ -37,7 +38,7 @@ export const PriceDisplay = () => {
         }
       >
         {response && response.changePercent
-          ? Math.abs(response.changePercent.toFixed(2))
+          ? Math.abs(response.changePercent).toFixed(2)
           : ""}
       </h4>
       <p

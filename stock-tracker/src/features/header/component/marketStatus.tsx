@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import sun from "../assets/sun.png";
 import moon from "../assets/moon.png";
 import moment from "moment";
+import { AppState } from "../../../store/rootReducer";
 
 export const MarketStatus = () => {
-  const response = useSelector(state => state.keyStats.response);
+  const response = useSelector((state: AppState) => state.keyStats.response);
 
   const marketStat = response
     ? response.isUSMarketOpen

@@ -4,13 +4,13 @@ import { LatestNewsActions } from "./actions";
 import { Reducer } from "redux";
 
 export interface NewsState {
-  latestNews?: LatestNewsType;
+  latestNews: LatestNewsType[];
   loading: boolean;
   error: boolean;
 }
 
 const initialState: NewsState = {
-  latestNews: undefined,
+  latestNews: [],
   loading: false,
   error: false
 };

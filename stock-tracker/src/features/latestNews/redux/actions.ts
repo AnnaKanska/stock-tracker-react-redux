@@ -5,15 +5,15 @@ export interface LatestNewsType {
   url: string;
   headline: string;
   source: string;
-  datetime?: number;
+  datetime: string;
 }
 
-type SetLatestNews = ActionPayload<typeof SET_NEWS, LatestNewsType>;
+type SetLatestNews = ActionPayload<typeof SET_NEWS, LatestNewsType[]>;
 type SetLoading = Action<typeof SET_LOADING_NEWS>;
 type SetError = Action<typeof SET_ERROR_NEWS>;
 
 export const setLatestNewsAction = (
-  latestNews: LatestNewsType
+  latestNews: LatestNewsType[]
 ): SetLatestNews => ({
   type: SET_NEWS,
   payload: latestNews

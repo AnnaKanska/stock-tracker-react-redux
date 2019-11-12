@@ -1,5 +1,14 @@
 import { socketService } from ".";
 import { eventActions } from "./eventActions";
+import { Dispatch } from "redux";
+import { AppState } from "../store/rootReducer";
+
+// type PayloadType = {
+//   isError: boolean;
+//   data: AppState;
+// };
+// type TestType = ActionPayload<"ADD_RESPONSE", Response>
+// }
 
 export const createSocketSubscriptions = dispatch => {
   socketService.create();

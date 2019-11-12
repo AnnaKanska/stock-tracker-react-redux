@@ -25,11 +25,20 @@ export const MarketStatus = () => {
       ? sun
       : moon
     : "";
+  const alternateText = response
+    ? response.isUSMarketOpen
+      ? "Open"
+      : "Closed"
+    : "";
 
   return (
     <div className="market_status_display">
       <p className="market_status_display__real_time">{realTimeDisplay}</p>
-      <img className="market_status__icon" src={statusIcon} alt="" />
+      <img
+        className="market_status__icon"
+        src={statusIcon}
+        alt={alternateText}
+      />
       <p className="market_status_display__real_time__status">{marketStat}</p>
     </div>
   );

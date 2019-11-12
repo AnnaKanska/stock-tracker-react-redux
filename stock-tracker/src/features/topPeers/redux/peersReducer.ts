@@ -3,14 +3,25 @@ import {
   SET_LOADING_PEERS,
   SET_ERROR_PEERS
 } from "./actionTypes";
+import { TopPeersType, TopPeersActions } from "./actions";
+import { Reducer } from "redux";
 
-const initialState = {
+export interface TopPeersState {
+  topPeers: TopPeersType;
+  loading: boolean;
+  error: boolean;
+}
+
+const initialState: TopPeersState = {
   topPeers: [],
   loading: false,
   error: false
 };
 
-export const peersReducer = (state = initialState, action) => {
+export const peersReducer: Reducer<TopPeersState, TopPeersActions> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case SET_LOADING_PEERS:
       return {

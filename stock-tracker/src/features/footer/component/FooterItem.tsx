@@ -2,15 +2,24 @@ import React from "react";
 import { Icon } from "antd";
 import "./Footer.css";
 
+interface FooterItems {
+  exchange: string;
+  currency: string;
+  price: number;
+  changePrice: number;
+  changePercentage: number;
+}
+
 export const FooterItem = ({
   exchange,
   currency,
   price,
   changePrice,
   changePercentage
-}) => {
+}: FooterItems) => {
   const changeIcon = changePrice > 0 ? "arrow-up" : "arrow-down";
   const changeColour = changePrice > 0 ? "green" : "red";
+
   return (
     <>
       <span className="footer__heading">{exchange} </span>

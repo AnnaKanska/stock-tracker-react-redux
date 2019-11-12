@@ -12,5 +12,7 @@ export const rootReducer = combineReducers({
   news: newsReducer,
   overview: overviewReducer,
   search: searchReducer,
-  peers: peersReducer
+  topPeers: peersReducer
 });
+
+export type AppState = ReturnType<typeof rootReducer>;

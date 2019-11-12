@@ -1,9 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { AppState } from "../../../store/rootReducer";
 
 export const CurrencyDisplay = () => {
-  const response = useSelector(state => state.keyStats.response);
-  const overview = useSelector(state => state.overview.companyOverview);
+  const response = useSelector((state: AppState) => state.keyStats.response);
+  const overview = useSelector(
+    (state: AppState) => state.overview.companyOverview
+  );
 
   return (
     <div className={response ? "currency_display" : "hidden"}>
@@ -16,12 +19,12 @@ export const CurrencyDisplay = () => {
         </li>
         <li
           className={
-            response.currency
+            response && response.currency
               ? "currency_display__item currency_display__item__currency"
               : "hidden"
           }
         >
-          {response.currency}
+          {response && response.currency}
         </li>
       </ul>
     </div>

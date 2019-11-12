@@ -1,26 +1,40 @@
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  KeyboardEventHandler,
+  ChangeEventHandler
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSymbolAction, setSearchInputAction } from "../redux/actions";
 import { Icon } from "antd";
 import "./Search.css";
+import { AppState } from "../../../store/rootReducer";
+import { SuggestionType } from "../redux/actions";
 
 export const Search = () => {
   const [symbol, setSymbol] = useState("");
   const [open, setOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const searchRef = useRef(null);
+  //                                                                 useref-a way to get out of react to dom
+  const dropdownRef = useRef<HTMLTableElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
 
-  const addSymbol = useCallback(symbol => dispatch(setSymbolAction(symbol)), [
-    dispatch
-  ]);
+  const addSymbol = useCallback(
+    (symbol: string) => dispatch(setSymbolAction(symbol)),
+    [dispatch]
+  );
   const addSearchInput = useCallback(
     searchInput => dispatch(setSearchInputAction(searchInput)),
     [dispatch]
   );
-  const suggestions = useSelector(state => state.search.suggestions);
-  const response = useSelector(state => state.keyStats.response);
-  const handleSubmit = e => {
+  const suggestions = useSelector(
+    (state: AppState) => state.search.suggestions
+  );
+  const response = useSelector((state: AppState) => state.keyStats.response);
+
+  const keyPressHandler: KeyboardEventHandler<HTMLInputElement> = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       if (symbol.trim() === "") return;
@@ -29,17 +43,20 @@ export const Search = () => {
       setSymbol("");
     }
   };
-  const onChange = e => {
+  const onChange: ChangeEventHandler<HTMLInputElement> = e => {
     setSymbol(e.target.value);
     addSearchInput(e.target.value);
   };
-  const onClick = data => {
+  const handleClick = (data: SuggestionType) => {
     addSymbol(data.symbol);
     setOpen(false);
     setSymbol("");
   };
   const handleBlur = () => {
     requestAnimationFrame(() => {
+      if (!dropdownRef.current || !searchRef.current) {
+        throw Error("Reference has not been defined yet!");
+      }
       if (
         !dropdownRef.current.contains(document.activeElement) &&
         !searchRef.current.contains(document.activeElement)
@@ -50,17 +67,23 @@ export const Search = () => {
       }
     });
   };
+
   const labelSymbol = response ? ` (${response.symbol})` : "";
+
   useEffect(() => {
-    setOpen(symbol !== "" && suggestions.length !== 0);
+    setOpen(
+      suggestions !== undefined && symbol !== "" && suggestions.length !== 0
+    );
   }, [suggestions, symbol]);
+
   const suggestionItems =
+    suggestions &&
     suggestions.length > 0 &&
     suggestions.map(data => {
       return (
         <tr
           className="search_display__suggestion_list__item"
-          onClick={() => onClick(data)} // have to use function to bind data
+          onClick={() => handleClick(data)} // have to use function to bind data
           key={data.symbol}
         >
           <td className="search_display__suggestion_list__item__symbol">{`${data.symbol} `}</td>
@@ -80,7 +103,7 @@ export const Search = () => {
           type="text"
           value={symbol}
           onChange={onChange}
-          onKeyPress={handleSubmit}
+          onKeyPress={keyPressHandler}
           onBlur={handleBlur}
           ref={searchRef}
           autoComplete="off"
@@ -90,7 +113,7 @@ export const Search = () => {
           htmlFor="search_display__search_bar"
         >
           {" "}
-          {response.companyName}
+          {response && response.companyName}
           <span className="search_display__search_bar__label__symbol">
             {labelSymbol}
           </span>
@@ -98,7 +121,7 @@ export const Search = () => {
       </div>
       <table
         ref={dropdownRef}
-        tabIndex="-1"
+        tabIndex={-1}
         className="search_display__suggestion_list"
         style={{ display: open ? "block" : "none" }}
       >

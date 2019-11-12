@@ -3,14 +3,26 @@ import {
   SET_LOADING_KEYSTATS,
   SET_ERROR_KEYSTATS
 } from "./actionTypes";
+import { Reducer } from "redux";
+import { KeyStatsActions } from "./actions";
+import { Response } from "./actions";
 
-const initialState = {
-  response: false,
+export interface KeyStatsState {
+  response?: Response;
+  loading: boolean;
+  error: boolean;
+}
+
+const initialState: KeyStatsState = {
+  response: undefined,
   loading: false,
   error: false
 };
 
-export const keyStatsReducer = (state = initialState, action) => {
+export const keyStatsReducer: Reducer<KeyStatsState, KeyStatsActions> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case SET_LOADING_KEYSTATS:
       return {

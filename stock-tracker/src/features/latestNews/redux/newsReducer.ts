@@ -1,16 +1,28 @@
 import { SET_NEWS, SET_LOADING_NEWS, SET_ERROR_NEWS } from "./actionTypes";
+import { NewsType } from "./actions";
+import { LatestNewsActions } from "./actions";
+import { Reducer } from "redux";
 
-const initialState = {
+export interface NewsState {
+  latestNews: NewsType[];
+  loading: boolean;
+  error: boolean;
+}
+
+const initialState: NewsState = {
   latestNews: [],
   loading: false,
   error: false
 };
 
-export const newsReducer = (state = initialState, action) => {
+export const newsReducer: Reducer<NewsState, LatestNewsActions> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case SET_LOADING_NEWS:
       return {
-        ...initialState,
+        ...state,
         loading: true
       };
     case SET_NEWS:

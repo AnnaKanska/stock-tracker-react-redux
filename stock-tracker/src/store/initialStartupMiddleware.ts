@@ -4,11 +4,13 @@ import { Middleware } from "redux";
 import { AppState } from "./rootReducer";
 import { SocketServiceType } from "../socket/socketService";
 
-type Dependencies = {
+export type Dependencies = {
   socketService: SocketServiceType;
 };
 
-type MiddlewareType = (dependencies: Dependencies) => Middleware<{}, AppState>;
+export type MiddlewareType = (
+  dependencies: Dependencies
+) => Middleware<{}, AppState>;
 
 export const initialStartupMiddlware: MiddlewareType = ({
   socketService

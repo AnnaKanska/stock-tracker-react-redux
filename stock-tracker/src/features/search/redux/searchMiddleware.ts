@@ -5,8 +5,9 @@ import { setLoadingKeyStatsAction } from "../../keyStats";
 import { setLoadingPeersAction } from "../../topPeers";
 import { ADD_SYMBOL, ADD_SEARCH_INPUT } from "./actionTypes";
 import { SYMBOL_INPUT, SEARCH_INPUT } from "../../../socket/eventTypes";
+import { MiddlewareType } from "../../../store/initialStartupMiddleware";
 
-export const searchMiddleware = ({
+export const searchMiddleware: MiddlewareType = ({
   socketService
 }) => store => next => action => {
   if (action.type === ADD_SYMBOL) {

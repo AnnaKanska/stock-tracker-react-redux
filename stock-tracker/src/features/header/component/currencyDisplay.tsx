@@ -1,13 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { AppState } from "../../../store/rootReducer";
+import { AppState } from "store/rootReducer";
 
 export const CurrencyDisplay = () => {
   const response = useSelector((state: AppState) => state.keyStats.response);
   const overview = useSelector(
-    (state: AppState) => state.overview.companyOverview
+    (state: AppState) => state.companyOverview.companyDetails
   );
 
+  if (overview === null) {
+    return null;
+  }
   return (
     <div className={response ? "currency_display" : "hidden"}>
       <ul>

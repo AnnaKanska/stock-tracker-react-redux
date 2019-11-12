@@ -4,7 +4,6 @@
     "module": "esnext",
     "allowJs": true,
     "jsx": "react",
-    "declaration": true,
     "strict": true,
     "esModuleInterop": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -14,7 +13,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": "src"
   },
   "include": ["src"]
 }

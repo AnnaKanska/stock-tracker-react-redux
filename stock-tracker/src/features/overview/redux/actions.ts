@@ -16,13 +16,13 @@ export interface OverviewInterface {
 
 export type SetCompanyOverview = ActionPayload<
   typeof ADD_COMPANY_OVERVIEW,
-  OverviewInterface[]
+  OverviewInterface
 >;
 export type SetCompanyOverviewLoading = Action<typeof SET_LOADING_OVERVIEW>;
 export type SetCompanyOverviewError = Action<typeof SET_ERROR_OVERVIEW>;
 
 export const setCompanyOverviewAction = (
-  companyOverview: OverviewInterface[]
+  companyOverview: OverviewInterface
 ): SetCompanyOverview => ({
   type: ADD_COMPANY_OVERVIEW,
   payload: companyOverview

@@ -3,14 +3,25 @@ import {
   SET_LOADING_OVERVIEW,
   SET_ERROR_OVERVIEW
 } from "./actionTypes";
+import { Reducer } from "redux";
+import { OverviewInterface, CompanyOverviewActions } from "./actions";
 
-const initialState = {
-  companyOverview: false,
+export interface OverviewState {
+  companyOverview: OverviewInterface[];
+  loading: boolean;
+  error: boolean;
+}
+
+const initialState: OverviewState = {
+  companyOverview: [],
   loading: false,
   error: false
 };
 
-export const overviewReducer = (state = initialState, action) => {
+export const overviewReducer: Reducer<OverviewState, CompanyOverviewActions> = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case SET_LOADING_OVERVIEW:
       return {

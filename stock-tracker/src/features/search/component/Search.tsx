@@ -16,7 +16,7 @@ import { SuggestionType } from "../redux/actions";
 export const Search = () => {
   const [symbol, setSymbol] = useState("");
   const [open, setOpen] = useState(false);
-  // useref-a way to get out of react to dom
+  //                                                                 useref-a way to get out of react to dom
   const dropdownRef = useRef<HTMLTableElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
@@ -34,8 +34,6 @@ export const Search = () => {
   );
   const response = useSelector((state: AppState) => state.keyStats.response);
 
-  // const keyPressHandler = (e: KeyboardEventHandler<HTMLInputElement>)
-
   const keyPressHandler: KeyboardEventHandler<HTMLInputElement> = e => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -49,7 +47,7 @@ export const Search = () => {
     setSymbol(e.target.value);
     addSearchInput(e.target.value);
   };
-  const onClick = (data: SuggestionType) => {
+  const handleClick = (data: SuggestionType) => {
     addSymbol(data.symbol);
     setOpen(false);
     setSymbol("");
@@ -85,7 +83,7 @@ export const Search = () => {
       return (
         <tr
           className="search_display__suggestion_list__item"
-          onClick={() => onClick(data)} // have to use function to bind data
+          onClick={() => handleClick(data)} // have to use function to bind data
           key={data.symbol}
         >
           <td className="search_display__suggestion_list__item__symbol">{`${data.symbol} `}</td>

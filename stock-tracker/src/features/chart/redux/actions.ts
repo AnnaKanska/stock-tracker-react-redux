@@ -6,12 +6,17 @@ import {
 } from "./actionTypes";
 import { Action, ActionPayload } from "../../../types";
 
-type SetData = ActionPayload<typeof SET_CHART_DATA, string>;
+export interface ChartData {
+  close: number;
+  date: string;
+}
+
+type SetData = ActionPayload<typeof SET_CHART_DATA, ChartData[]>;
 type SetTime = ActionPayload<typeof SET_CHART_TIME, string>;
 type SetLoading = Action<typeof LOADING_CHART>;
 type SetError = Action<typeof SET_ERROR_CHART>;
 
-export const setChartDataAction = (chartData: string): SetData => ({
+export const setChartDataAction = (chartData: ChartData[]): SetData => ({
   type: SET_CHART_DATA,
   payload: chartData
 });

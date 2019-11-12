@@ -5,10 +5,10 @@ import {
   SET_ERROR_CHART
 } from "./actionTypes";
 import { Reducer } from "redux";
-import { ChartActions } from "./actions";
+import { ChartActions, ChartData } from "./actions";
 
 export interface ChartState {
-  chartData: [];
+  chartData: ChartData[];
   chartTime: string;
   loading: boolean;
   error: boolean;

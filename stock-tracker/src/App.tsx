@@ -6,10 +6,11 @@ import { Chart } from "./features/chart/component/chart";
 import { LatestNews } from "./features/latestNews";
 import { Overview } from "./features/overview";
 import { Footer } from "./features/footer";
+import { AppState } from "./store/rootReducer";
 import "./assets/styles/App.css";
 
 function App() {
-  const symbol = useSelector(state => state.search.symbol);
+  const symbol = useSelector((state: AppState) => state.search.symbol);
   return (
     <>
       <div className="wrapper">

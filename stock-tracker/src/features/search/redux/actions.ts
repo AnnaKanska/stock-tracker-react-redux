@@ -11,10 +11,13 @@ export type SuggestionType = {
   name: string;
   exchange: string;
 };
-type SetSymbol = ActionPayload<typeof ADD_SYMBOL, string>;
-type SetSearch = ActionPayload<typeof ADD_SEARCH_INPUT, string>;
-type SetSuggestions = ActionPayload<typeof ADD_SUGGESTIONS, SuggestionType[]>;
-type SetError = Action<typeof SET_ERROR_SEARCH>;
+export type SetSymbol = ActionPayload<typeof ADD_SYMBOL, string>;
+export type SetSearch = ActionPayload<typeof ADD_SEARCH_INPUT, string>;
+export type SetSuggestions = ActionPayload<
+  typeof ADD_SUGGESTIONS,
+  SuggestionType[]
+>;
+export type SetSearchError = Action<typeof SET_ERROR_SEARCH>;
 
 export const setSymbolAction = (symbol: string): SetSymbol => ({
   type: ADD_SYMBOL,
@@ -33,8 +36,12 @@ export const setSuggestionsAction = (
   payload: suggestions
 });
 
-export const setErrorSearchAction = (): SetError => ({
+export const setErrorSearchAction = (): SetSearchError => ({
   type: SET_ERROR_SEARCH
 });
 
-export type SearchActions = SetSymbol | SetSearch | SetSuggestions | SetError;
+export type SearchActions =
+  | SetSymbol
+  | SetSearch
+  | SetSuggestions
+  | SetSearchError;

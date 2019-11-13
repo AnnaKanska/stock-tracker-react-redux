@@ -25,7 +25,7 @@ export const TopPeers = () => {
     <div className="top_peers">
       <h1>TOP PEERS</h1>
       {error ? (
-        <ErrorMessage feature={"Top peers"} />
+        <ErrorMessage featureName="Top peers" />
       ) : loading ? (
         <Loading />
       ) : (

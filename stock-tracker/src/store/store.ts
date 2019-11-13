@@ -1,4 +1,4 @@
-import { Middleware, createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { rootReducer } from "./rootReducer";
 import { initialStartupMiddlware } from "./initialStartupMiddleware";
 import { searchMiddleware } from "../features/search";

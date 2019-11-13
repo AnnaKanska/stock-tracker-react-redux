@@ -26,7 +26,7 @@ import {
 import { SetSuggestions, SetSearchError } from "features/search/redux/actions";
 import { AddTopPeers, SetTopPeersError } from "features/topPeers/redux/actions";
 
-interface EventActionInterface {
+export interface EventActionInterface {
   event:
     | typeof EventType.CHART_DATA
     | typeof EventType.STOCK_DATA

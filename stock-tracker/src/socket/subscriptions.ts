@@ -1,5 +1,5 @@
 import { socketService } from ".";
-import { eventActions } from "./eventActions";
+import { EventActionInterface } from "./eventActions";
 import { Dispatch } from "redux";
 import { AppState } from "../store/rootReducer";
 
@@ -8,15 +8,18 @@ interface PayloadType {
   data: AppState;
 }
 
-export const createSocketSubscriptions = (dispatch: Dispatch) => {
+export const createSocketSubscriptions = (
+  dispatch: Dispatch,
+  eventActions: EventActionInterface[]
+) => {
   socketService.create();
   const unsubscribeSockets = eventActions.map(
-    ([event, actionCreator, errorActionCreator]) =>
+    ({ event, action, errorAction }) =>
       socketService.createSocketSubscription(event, (payload: PayloadType) => {
         if (payload.data) {
-          dispatch(actionCreator(payload.data));
+          dispatch(action(payload.data));
         } else {
-          dispatch(errorActionCreator(payload.isError));
+          dispatch(errorAction(payload.isError));
         }
       })
   );

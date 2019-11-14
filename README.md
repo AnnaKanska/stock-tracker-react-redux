@@ -1,56 +1,85 @@
-# stock-tracker-react-redux
-Application allows you to select a specific stock and see information pertaining to it.
+# Stock Tracker
 
-## Requirements
-### Functional Requirements
+This application allows the user to search for a specific stock and information such as price, key stats, charts, latest news, company overview and top peers will be displayed.
 
-- Must have a header with:
-  - Adaptive Logo
-  - Navigation bar:
-    - Quotes
-    - Markets
-    - Watchlists
-  
-- Must have a search bar which allows the user to search for a specific stock
-- To the right of that search bar have:
-  - Real Time Price
-  - How much price has increased or decreased
-  - % of increase of decrease
+## Getting Started
 
-- Must Display the following Key Stats of a specific stock:
-    - Previous Close
-    - Day Range
-    - Volume
-    - Market Cap
-    - P/E Ratio
-    - Open
-    - 52 Week Range
-    - Total Avg Volume
-    - Earnings Per Share
-    - Dividend & Yield
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-- Must Display a line Graph showing (X: Time ) against (Y: Real Time Price) of a specific stock
-  - Top price(or current) must be highlighted
-  - Graph has options to change time view to:
-      - 1D
-      - 5D
-      - 1M
-      - 1Y
-      - 5Y
-      - Max
+### Prerequisites
 
-- To the right of graph, must have Latest News of specific stock or stocks in general
-- Under Latest News, must have Company Overview of that specific stock
-- Under Company Overview, must have section for TOP PEERS
-- At the footer:
-  - Have US Market Stock Exchange Stats (e.g NASDAQ, DJIA, S&P)
-  - Have a favourites section with user's favourite stocks
+**What things you need to install the software and how to install them:**
 
-### Non-Functional Requirements
+- Follow the instructions and download the latest version of **node** and **npm** from:
 
-- Stock change in price must be:
-  - Red if a decrease in price
-  - Green if an increase in price
-- Stock % change in price must be:
-  - Red if a decrease in price
-  - Green if an increase in price
+  https://nodejs.org/en/download
+
+Check you have downloading them by running the following commands:
+
+```
+node -v
+npm -v
+```
+
+- Download and install the latest version of **Git** by following the instructions from:
+
+  https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+### Installing
+
+A step by step series of examples that tell you how to install and run the application.
+
+Clone the repository from GitHub by opening Git Bash and running:
+
+```
+git clone https://github.com/danielabbasi/stock-tracker-react-redux.git
+```
+
+Change into the correct directory of the project:
+
+```
+cd stock-tracker
+```
+
+Install all the project prerequisites and dependancies:
+
+```
+npm install
+```
+
+Get the server up and running:
+
+```
+npm run dev
+```
+
+Start the client application:
+
+```
+npm start
+```
+
+The application should now be up and running. Navigate to <localhost:3000> and search for a stock such as 'AAPL'. You should see the website be populated with the price, key stats, chart, latest news, company overview and top peers relating to the Apple stock.
+
+## Running the tests
+
+To run the automated tests of this application, use the following command followed by pressing 'a':
+
+```
+npm test
+```
+
+## Built With
+
+- [React](https://reactjs.org/) - The web library used
+- [Redux](https://redux.js.org/basics/usage-with-react) - Predictable state container for JavaScript applications
+- [Node.js](https://nodejs.org/en/about/) - Open source server environment
+- [Express](https://expressjs.com/) - Web framework for Node.js
+- [socket-io](https://socket.io/) - library for realtime web applications
+- [TypeScript](https://www.typescriptlang.org/) - Strict syntactical superset of JavaScript
+
+## Authors
+
+- **Daniel Abbasi** - [GitHub](https://github.com/danielabbasi/)
+
+* **Anna Kanska** - [GitHub](https://github.com/AnnaKanska)

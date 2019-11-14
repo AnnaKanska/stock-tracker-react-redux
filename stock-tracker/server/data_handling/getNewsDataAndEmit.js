@@ -13,10 +13,11 @@ const getNewsDataAndEmit = async (socket, stockSymbol) => {
       source: data.source,
       url: data.url
     }));
-    socket.emit("LatestNews", news);
+    socket.emit("LatestNews", { data: news });
   } catch (error) {
-    socket.emit("LatestNewsError", error);
+    socket.emit("LatestNews", { isError: true });
     console.error(`News Error: ${error}`);
   }
 };
+
 exports.getNewsDataAndEmit = getNewsDataAndEmit;

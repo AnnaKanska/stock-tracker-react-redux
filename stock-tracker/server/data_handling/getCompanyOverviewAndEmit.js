@@ -23,10 +23,11 @@ const getCompanyOverviewAndEmit = async (socket, stockSymbol) => {
       website,
       description
     };
-    socket.emit("CompanyOverview", overview);
+    socket.emit("CompanyOverview", { data: overview });
   } catch (error) {
-    socket.emit("CompanyOverviewError", error);
+    socket.emit("CompanyOverview", { isError: true });
     console.error(`Company Overview Error: ${error}`);
   }
 };
+
 exports.getCompanyOverviewAndEmit = getCompanyOverviewAndEmit;

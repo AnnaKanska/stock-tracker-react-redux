@@ -7,10 +7,11 @@ const getTopPeersAndEmit = async (socket, stockSymbol) => {
     const topPeers = await axios.get(
       `${HOST}/stable/stock/${stockSymbol}/peers?token=${TOKEN}`
     );
-    socket.emit("TopPeers", topPeers.data);
+    socket.emit("TopPeers", { data: topPeers.data });
   } catch (error) {
-    socket.emit("TopPeersError", error);
+    socket.emit("TopPeers", { isError: true });
     console.error(`Top Peers Error: ${error}`);
   }
 };
+
 exports.getTopPeersAndEmit = getTopPeersAndEmit;

@@ -19,10 +19,11 @@ const getChartDataAndEmit = async (socket, stockSymbol, chartTime) => {
         date: data.date
       }));
     }
-    socket.emit("ChartData", chart);
+    socket.emit("ChartData", { data: chart });
   } catch (error) {
-    socket.emit("ChartDataError", error);
+    socket.emit("ChartData", { isError: true });
     console.error(`Chart Data Error: ${error}`);
   }
 };
+
 exports.getChartDataAndEmit = getChartDataAndEmit;

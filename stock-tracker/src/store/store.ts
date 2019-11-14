@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from "redux";
+import { Middleware, createStore, applyMiddleware, compose } from "redux";
 import { rootReducer } from "./rootReducer";
 import { initialStartupMiddlware } from "./initialStartupMiddleware";
 import { searchMiddleware } from "../features/search";
@@ -10,6 +10,12 @@ const middleware = [
   searchMiddleware({ socketService }),
   chartMiddleware({ socketService })
 ];
+
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: typeof compose;
+  }
+}
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

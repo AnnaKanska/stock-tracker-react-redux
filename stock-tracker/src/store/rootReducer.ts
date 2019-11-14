@@ -1,6 +1,6 @@
-import { combineReducers, AnyAction } from "redux";
+import { combineReducers } from "redux";
 import { chartReducer } from "../features/chart";
-import { keyStatsReducer } from "../features/keyStats/redux/keyStatsReducer";
+import { keyStatsReducer } from "../features/keyStats";
 import { newsReducer } from "../features/latestNews";
 import { overviewReducer } from "../features/overview";
 import { searchReducer } from "../features/search";

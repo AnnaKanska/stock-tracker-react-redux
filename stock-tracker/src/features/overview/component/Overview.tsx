@@ -17,7 +17,7 @@ export const Overview = () => {
       {loading ? (
         <Loading />
       ) : error || !companyOverview ? (
-        <ErrorMessage feature={"Company Overview"} />
+        <ErrorMessage featureName="Company Overview" />
       ) : (
         <>
           <h2 className={companyOverview ? "overview__company" : "hidden"}>

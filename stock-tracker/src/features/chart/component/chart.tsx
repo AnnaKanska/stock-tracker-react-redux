@@ -58,7 +58,7 @@ export const Chart = () => {
   return (
     <div className="chart">
       {error ? (
-        <ErrorMessage feature={"Chart data"} />
+        <ErrorMessage featureName="Chart data" />
       ) : loading ? (
         <Loading />
       ) : (

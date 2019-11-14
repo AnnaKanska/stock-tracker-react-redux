@@ -1,10 +1,10 @@
 import React from "react";
 
-const ErrorMessage = (props: { feature: string }) => {
+const ErrorMessage = (props: { featureName: string }) => {
   return (
     <div>
       <p className="error__message">
-        Error: {props.feature} can not be displayed
+        Error: {props.featureName} can not be displayed
       </p>
     </div>
   );

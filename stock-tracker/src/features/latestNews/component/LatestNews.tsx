@@ -28,7 +28,7 @@ export const LatestNews = () => {
     <div className="latestnews">
       <h1>LATEST NEWS</h1>
       {error ? (
-        <ErrorMessage feature={"Latest News"} />
+        <ErrorMessage featureName="Latest News" />
       ) : loading ? (
         <Loading />
       ) : (

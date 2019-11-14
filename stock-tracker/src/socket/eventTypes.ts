@@ -1,9 +1,11 @@
-export const STOCK_DATA = "StockData";
-export const SYMBOL_INPUT = "symbol";
-export const SEARCH_INPUT = "search";
-export const COMPANY_OVERVIEW = "CompanyOverview";
-export const LATEST_NEWS = "LatestNews";
-export const SUGGESTIONS = "suggestions";
-export const CHART_DATA = "ChartData";
-export const CHART_TIME = "chartTime";
-export const TOP_PEERS = "TopPeers";
+export enum EventTypes {
+  STOCK_DATA = "StockData",
+  SYMBOL_INPUT = "symbol",
+  SEARCH_INPUT = "search",
+  COMPANY_OVERVIEW = "CompanyOverview",
+  LATEST_NEWS = "LatestNews",
+  SUGGESTIONS = "suggestions",
+  CHART_DATA = "ChartData",
+  CHART_TIME = "chartTime",
+  TOP_PEERS = "TopPeers"
+}

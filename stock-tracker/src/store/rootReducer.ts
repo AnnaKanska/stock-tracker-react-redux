@@ -10,7 +10,7 @@ export const rootReducer = combineReducers({
   chart: chartReducer,
   keyStats: keyStatsReducer,
   news: newsReducer,
-  overview: overviewReducer,
+  companyOverview: overviewReducer,
   search: searchReducer,
   topPeers: peersReducer
 });

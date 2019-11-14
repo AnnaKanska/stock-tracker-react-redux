@@ -11,25 +11,31 @@ export interface ChartData {
   date: string;
 }
 
-type SetData = ActionPayload<typeof SET_CHART_DATA, ChartData[]>;
-type SetTime = ActionPayload<typeof SET_CHART_TIME, string>;
-type SetLoading = Action<typeof LOADING_CHART>;
-type SetError = Action<typeof SET_ERROR_CHART>;
+export type SetChartData = ActionPayload<typeof SET_CHART_DATA, ChartData[]>;
+export type SetChartTime = ActionPayload<typeof SET_CHART_TIME, string>;
+export type SetChartLoading = Action<typeof LOADING_CHART>;
+export type SetChartError = Action<typeof SET_ERROR_CHART>;
 
-export const setChartDataAction = (chartData: ChartData[]): SetData => ({
+export const setChartDataAction = (chartData: ChartData[]): SetChartData => ({
   type: SET_CHART_DATA,
   payload: chartData
 });
 
-export const setChartTimeAction = (chartTime: string): SetTime => ({
+export const setChartTimeAction = (chartTime: string): SetChartTime => ({
   type: SET_CHART_TIME,
   payload: chartTime
 });
 
-export const setChartLoadingAction = (): SetLoading => ({
+export const setChartLoadingAction = (): SetChartLoading => ({
   type: LOADING_CHART
 });
 
-export const setChartErrorAction = (): SetError => ({ type: SET_ERROR_CHART });
+export const setChartErrorAction = (): SetChartError => ({
+  type: SET_ERROR_CHART
+});
 
-export type ChartActions = SetData | SetTime | SetLoading | SetError;
+export type ChartActions =
+  | SetChartData
+  | SetChartTime
+  | SetChartLoading
+  | SetChartError;

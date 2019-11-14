@@ -29,23 +29,24 @@ export interface Response {
   ytdChange: number;
 }
 
-export type SetResponse = ActionPayload<typeof SET_RESPONSE, Response>;
+export type SetKeyStatsResponse = ActionPayload<typeof SET_RESPONSE, Response>;
+export type SetKeyStatsLoading = Action<typeof SET_LOADING_KEYSTATS>;
+export type SetKeyStatsError = Action<typeof SET_ERROR_KEYSTATS>;
 
-export const setResponseAction = (response: Response): SetResponse => ({
+export const setResponseAction = (response: Response): SetKeyStatsResponse => ({
   type: SET_RESPONSE,
   payload: response
 });
 
-export type SetLoading = Action<typeof SET_LOADING_KEYSTATS>;
-
-export const setLoadingKeyStatsAction = (): SetLoading => ({
+export const setLoadingKeyStatsAction = (): SetKeyStatsLoading => ({
   type: SET_LOADING_KEYSTATS
 });
 
-export type SetError = Action<typeof SET_ERROR_KEYSTATS>;
-
-export const setErrorKeyStatsAction = (): SetError => ({
+export const setErrorKeyStatsAction = (): SetKeyStatsError => ({
   type: SET_ERROR_KEYSTATS
 });
 
-export type KeyStatsActions = SetResponse | SetLoading | SetError;
+export type KeyStatsActions =
+  | SetKeyStatsResponse
+  | SetKeyStatsLoading
+  | SetKeyStatsError;

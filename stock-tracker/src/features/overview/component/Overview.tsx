@@ -7,17 +7,17 @@ import "./Overview.css";
 import { AppState } from "../../../store/rootReducer";
 
 export const Overview = () => {
-  const { companyOverview, loading, error } = useSelector(
-    (state: AppState) => state.overview
+  const { companyDetails: companyOverview, loading, error } = useSelector(
+    (state: AppState) => state.companyOverview
   );
 
   return (
     <div className="overview">
       <h1>COMPANY OVERVIEW</h1>
-      {error ? (
-        <ErrorMessage feature={"Company Overview"} />
-      ) : loading ? (
+      {loading ? (
         <Loading />
+      ) : error || !companyOverview ? (
+        <ErrorMessage feature={"Company Overview"} />
       ) : (
         <>
           <h2 className={companyOverview ? "overview__company" : "hidden"}>

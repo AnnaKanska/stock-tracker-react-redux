@@ -5,6 +5,7 @@ import {
   SET_ERROR_CHART
 } from "./actionTypes";
 import { Action, ActionPayload } from "../../../types";
+import { SetSymbol } from "../../search/redux/actions";
 
 export interface ChartData {
   close: number;
@@ -38,4 +39,5 @@ export type ChartActions =
   | SetChartData
   | SetChartTime
   | SetChartLoading
+  | SetSymbol
   | SetChartError;

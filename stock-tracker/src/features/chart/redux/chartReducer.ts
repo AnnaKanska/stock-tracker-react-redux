@@ -4,6 +4,7 @@ import {
   LOADING_CHART,
   SET_ERROR_CHART
 } from "./actionTypes";
+import { ADD_SYMBOL } from "../../search/redux/actionTypes";
 import { Reducer } from "redux";
 import { ChartActions, ChartData } from "./actions";
 
@@ -26,7 +27,7 @@ export const chartReducer: Reducer<ChartState, ChartActions> = (
   action
 ) => {
   switch (action.type) {
-    case LOADING_CHART:
+    case ADD_SYMBOL:
       return {
         ...initialState,
         loading: true

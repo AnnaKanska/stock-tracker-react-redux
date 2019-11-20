@@ -1,9 +1,6 @@
-import {
-  SET_RESPONSE,
-  SET_LOADING_KEYSTATS,
-  SET_ERROR_KEYSTATS
-} from "./actionTypes";
+import { SET_RESPONSE, SET_ERROR_KEYSTATS } from "./actionTypes";
 import { Action, ActionPayload } from "../../../types";
+import { SetSymbol } from "features/search/redux/actions";
 
 export interface Response {
   avgTotalVolume: number;
@@ -30,16 +27,11 @@ export interface Response {
 }
 
 export type SetKeyStatsResponse = ActionPayload<typeof SET_RESPONSE, Response>;
-export type SetKeyStatsLoading = Action<typeof SET_LOADING_KEYSTATS>;
 export type SetKeyStatsError = Action<typeof SET_ERROR_KEYSTATS>;
 
 export const setResponseAction = (response: Response): SetKeyStatsResponse => ({
   type: SET_RESPONSE,
   payload: response
-});
-
-export const setLoadingKeyStatsAction = (): SetKeyStatsLoading => ({
-  type: SET_LOADING_KEYSTATS
 });
 
 export const setErrorKeyStatsAction = (): SetKeyStatsError => ({
@@ -48,5 +40,5 @@ export const setErrorKeyStatsAction = (): SetKeyStatsError => ({
 
 export type KeyStatsActions =
   | SetKeyStatsResponse
-  | SetKeyStatsLoading
+  | SetSymbol
   | SetKeyStatsError;

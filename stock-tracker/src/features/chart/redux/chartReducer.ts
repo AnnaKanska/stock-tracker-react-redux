@@ -1,9 +1,4 @@
-import {
-  SET_CHART_DATA,
-  SET_CHART_TIME,
-  LOADING_CHART,
-  SET_ERROR_CHART
-} from "./actionTypes";
+import { SET_CHART_DATA, SET_CHART_TIME, SET_ERROR_CHART } from "./actionTypes";
 import { ADD_SYMBOL } from "../../search/redux/actionTypes";
 import { Reducer } from "redux";
 import { ChartActions, ChartData } from "./actions";

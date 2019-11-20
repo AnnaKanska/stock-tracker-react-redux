@@ -1,11 +1,8 @@
-import {
-  SET_RESPONSE,
-  SET_LOADING_KEYSTATS,
-  SET_ERROR_KEYSTATS
-} from "./actionTypes";
+import { SET_RESPONSE, SET_ERROR_KEYSTATS } from "./actionTypes";
 import { Reducer } from "redux";
 import { KeyStatsActions } from "./actions";
 import { Response } from "./actions";
+import { ADD_SYMBOL } from "features/search";
 
 export interface KeyStatsState {
   response?: Response;
@@ -24,7 +21,7 @@ export const keyStatsReducer: Reducer<KeyStatsState, KeyStatsActions> = (
   action
 ) => {
   switch (action.type) {
-    case SET_LOADING_KEYSTATS:
+    case ADD_SYMBOL:
       return {
         ...initialState,
         loading: true

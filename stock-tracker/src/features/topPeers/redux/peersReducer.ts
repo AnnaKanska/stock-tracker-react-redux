@@ -1,10 +1,7 @@
-import {
-  ADD_TOP_PEERS,
-  SET_LOADING_PEERS,
-  SET_ERROR_PEERS
-} from "./actionTypes";
+import { ADD_TOP_PEERS, SET_ERROR_PEERS } from "./actionTypes";
 import { TopPeersType, TopPeersActions } from "./actions";
 import { Reducer } from "redux";
+import { ADD_SYMBOL } from "features/search";
 
 export interface TopPeersState {
   topPeers: TopPeersType;
@@ -23,7 +20,7 @@ export const peersReducer: Reducer<TopPeersState, TopPeersActions> = (
   action
 ) => {
   switch (action.type) {
-    case SET_LOADING_PEERS:
+    case ADD_SYMBOL:
       return {
         ...initialState,
         loading: true

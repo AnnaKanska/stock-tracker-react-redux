@@ -1,6 +1,7 @@
-import { SET_NEWS, SET_LOADING_NEWS, SET_ERROR_NEWS } from "./actionTypes";
+import { SET_NEWS, SET_ERROR_NEWS } from "./actionTypes";
 import { NewsInterface, LatestNewsActions } from "./actions";
 import { Reducer } from "redux";
+import { ADD_SYMBOL } from "features/search";
 
 export interface NewsState {
   latestNews: NewsInterface[];
@@ -19,7 +20,7 @@ export const newsReducer: Reducer<NewsState, LatestNewsActions> = (
   action
 ) => {
   switch (action.type) {
-    case SET_LOADING_NEWS:
+    case ADD_SYMBOL:
       return {
         ...state,
         loading: true

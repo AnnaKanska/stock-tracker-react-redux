@@ -1,10 +1,7 @@
-import {
-  ADD_COMPANY_OVERVIEW,
-  SET_LOADING_OVERVIEW,
-  SET_ERROR_OVERVIEW
-} from "./actionTypes";
+import { ADD_COMPANY_OVERVIEW, SET_ERROR_OVERVIEW } from "./actionTypes";
 import { Reducer } from "redux";
 import { OverviewInterface, CompanyOverviewActions } from "./actions";
+import { ADD_SYMBOL } from "features/search";
 
 export interface OverviewState {
   companyDetails: OverviewInterface | null;
@@ -23,7 +20,7 @@ export const overviewReducer: Reducer<OverviewState, CompanyOverviewActions> = (
   action
 ) => {
   switch (action.type) {
-    case SET_LOADING_OVERVIEW:
+    case ADD_SYMBOL:
       return {
         ...initialState,
         loading: true

@@ -1,8 +1,8 @@
 import { chartReducer, ChartState } from "./chartReducer";
 import { SET_CHART_DATA, SET_CHART_TIME, SET_ERROR_CHART } from "./actionTypes";
-import { ADD_SYMBOL } from "../../search/redux/actionTypes";
+import { ADD_SYMBOL } from "features/search/redux/actionTypes";
 import { ChartActions } from "./actions";
-import { SetSymbol } from "../../search/redux/actions";
+import { SetSymbol } from "features/search/redux/actions";
 
 describe("testing chart reducer", () => {
   let initialState: ChartState = {

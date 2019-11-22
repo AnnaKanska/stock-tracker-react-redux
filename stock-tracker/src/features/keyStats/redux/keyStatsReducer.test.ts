@@ -3,7 +3,6 @@ import { SET_RESPONSE, SET_ERROR_KEYSTATS } from "./actionTypes";
 import { ADD_SYMBOL } from "../../search/redux/actionTypes";
 import { SetSymbol } from "../../search/redux/actions";
 import { Response, KeyStatsActions } from "./actions";
-import { ActionPayload } from "types";
 
 describe("testing keyStats reducer", () => {
   let initialState: KeyStatsState = {
@@ -30,9 +29,10 @@ describe("testing keyStats reducer", () => {
   });
 
   describe("returns expected payload when SET_RESPONSE action is called", () => {
-    const action: ActionPayload<typeof SET_RESPONSE, string | Response> = {
+    const payload = {} as Response;
+    const action: KeyStatsActions = {
       type: SET_RESPONSE,
-      payload: "test payload"
+      payload
     };
 
     beforeAll(() => {
@@ -40,7 +40,7 @@ describe("testing keyStats reducer", () => {
     });
 
     it("should update the state", () => {
-      expect(newState.response).toEqual("test payload");
+      expect(newState.response).toEqual(payload);
     });
   });
 

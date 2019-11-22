@@ -1,95 +1,76 @@
 import { chartReducer } from "./chartReducer";
-import {
-  SET_CHART_DATA,
-  SET_CHART_TIME,
-  LOADING_CHART,
-  SET_ERROR_CHART
-} from "./actionTypes";
+import { SET_CHART_DATA, SET_CHART_TIME, SET_ERROR_CHART } from "./actionTypes";
+import { ADD_SYMBOL } from "../../search/redux/actionTypes";
 
-const setupInitialState = () => ({
-  initialState: {
+describe("testing chart reducer", () => {
+  let initialState = {
     chartData: [],
     chartTime: "1Y",
     loading: false,
     error: false
-  }
-});
+  };
 
-describe("testing chart reducer", () => {
-  describe("when given unknown/invalid action", () => {
-    let initialState;
+  describe("returns expected payload when SET_CHART_DATA action is called", () => {
+    const action = {
+      type: SET_CHART_DATA,
+      payload: [{ close: "1", date: "2019/11/22" }]
+    };
+
     let newState;
+
     beforeAll(() => {
-      initialState = setupInitialState();
-      const action = { type: "UNKNOWN_ACTION" };
       newState = chartReducer(initialState, action);
     });
-    it("should not change the initial state", () => {
-      expect(newState).toBe(initialState);
+
+    it("should update the state", () => {
+      expect(newState.chartData).toEqual([{ close: "1", date: "2019/11/22" }]);
     });
   });
-  describe("when given SET_CHART_DATA action", () => {
-    let initialState;
+
+  describe("returns expected payload when SET_CHART_TIME action is called", () => {
+    const action = {
+      type: SET_CHART_TIME,
+      payload: "5Y"
+    };
+
     let newState;
+
     beforeAll(() => {
-      initialState = setupInitialState();
-      const action = {
-        type: SET_CHART_DATA,
-        payload: [
-          { close: "187.1", date: "2018/04/14" },
-          { close: "69", date: "2018/12/02" }
-        ]
-      };
       newState = chartReducer(initialState, action);
     });
-    it("should update the chart data state", () => {
-      expect(newState.chartData).toEqual([
-        { close: "187.1", date: "2018/04/14" },
-        { close: "69", date: "2018/12/02" }
-      ]);
-    });
-  });
-  describe('when given the "SET_CHART_TIME" action', () => {
-    let initialState;
-    let newState;
-    beforeAll(() => {
-      initialState = setupInitialState();
-      const action = {
-        type: SET_CHART_TIME,
-        payload: "5Y"
-      };
-      newState = chartReducer(initialState, action);
-    });
-    it("should update the chart time state", () => {
+
+    it("should update the state", () => {
       expect(newState.chartTime).toEqual("5Y");
     });
   });
-  describe("when given the LOADING_CHART action", () => {
-    let initialState;
+
+  describe("returns loading as true after the ADD_SYMBOL action is called", () => {
+    const action = {
+      type: ADD_SYMBOL
+    };
     let newState;
+
     beforeAll(() => {
-      initialState = setupInitialState();
-      const action = {
-        type: LOADING_CHART
-      };
       newState = chartReducer(initialState, action);
     });
-    it("should update the loading state", () => {
-      expect(newState.loading).toEqual(true);
+
+    it("should update the state", () => {
+      expect(newState.loading).toBeTruthy();
     });
   });
-  describe("when given the SET_ERROR_CHART action", () => {
-    let initialState;
+
+  describe("returns error as true after SET_ERROR_CHART action is calle", () => {
+    const action = {
+      type: SET_ERROR_CHART
+    };
     let newState;
+
     beforeAll(() => {
-      initialState = setupInitialState();
-      const action = {
-        type: SET_ERROR_CHART
-      };
       newState = chartReducer(initialState, action);
     });
-    it("should update the error state", () => {
-      expect(newState.error).toEqual(true);
+
+    it("should update the state", () => {
+      expect(newState.error).toBeTruthy();
     });
   });
 });

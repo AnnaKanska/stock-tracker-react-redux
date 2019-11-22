@@ -58,7 +58,7 @@ describe("testing chart reducer", () => {
     });
   });
 
-  describe("returns error as true after SET_ERROR_CHART action is calle", () => {
+  describe("returns error as true after SET_ERROR_CHART action is called", () => {
     const action: ChartActions = {
       type: SET_ERROR_CHART
     };

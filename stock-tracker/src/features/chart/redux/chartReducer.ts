@@ -37,7 +37,7 @@ export const chartReducer: Reducer<ChartState, ChartActions> = (
       return {
         ...initialState,
         chartTime: action.payload,
-        loading: true
+        loading: false
       };
     case SET_ERROR_CHART:
       return {

@@ -3,7 +3,6 @@ import { ADD_COMPANY_OVERVIEW, SET_ERROR_OVERVIEW } from "./actionTypes";
 import { SetSymbol } from "features/search/redux/actions";
 import { ADD_SYMBOL } from "features/search";
 import { CompanyOverviewActions } from "./actions";
-import { exec } from "child_process";
 
 describe("testing company overview reducer", () => {
   let initialState: OverviewState = {
@@ -25,7 +24,7 @@ describe("testing company overview reducer", () => {
     });
 
     it("should update the state", () => {
-      expect(newState.loading).toBeTruthy();
+      expect(newState.loading).toEqual(true);
     });
   });
 
@@ -35,10 +34,10 @@ describe("testing company overview reducer", () => {
       payload: {
         companyName: "Apple",
         symbol: "aapl",
-        website: "www",
-        description: "lalala",
-        exchange: "lala",
-        industry: "la"
+        website: "www.apple.com",
+        description: "test description",
+        exchange: "12345",
+        industry: "test"
       }
     };
 
@@ -50,10 +49,10 @@ describe("testing company overview reducer", () => {
       expect(newState.companyDetails).toEqual({
         companyName: "Apple",
         symbol: "aapl",
-        website: "www",
-        description: "lalala",
-        exchange: "lala",
-        industry: "la"
+        website: "www.apple.com",
+        description: "test description",
+        exchange: "12345",
+        industry: "test"
       });
     });
   });

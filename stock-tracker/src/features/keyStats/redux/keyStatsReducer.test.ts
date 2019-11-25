@@ -24,7 +24,7 @@ describe("testing keyStats reducer", () => {
     });
 
     it("should update the state", () => {
-      expect(newState.loading).toBeTruthy();
+      expect(newState.loading).toEqual(true);
     });
   });
 

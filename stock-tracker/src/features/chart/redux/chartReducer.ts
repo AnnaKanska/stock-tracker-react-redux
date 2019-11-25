@@ -1,9 +1,5 @@
-import {
-  SET_CHART_DATA,
-  SET_CHART_TIME,
-  LOADING_CHART,
-  SET_ERROR_CHART
-} from "./actionTypes";
+import { SET_CHART_DATA, SET_CHART_TIME, SET_ERROR_CHART } from "./actionTypes";
+import { ADD_SYMBOL } from "../../search/redux/actionTypes";
 import { Reducer } from "redux";
 import { ChartActions, ChartData } from "./actions";
 
@@ -26,7 +22,7 @@ export const chartReducer: Reducer<ChartState, ChartActions> = (
   action
 ) => {
   switch (action.type) {
-    case LOADING_CHART:
+    case ADD_SYMBOL:
       return {
         ...initialState,
         loading: true
@@ -41,7 +37,7 @@ export const chartReducer: Reducer<ChartState, ChartActions> = (
       return {
         ...initialState,
         chartTime: action.payload,
-        loading: true
+        loading: false
       };
     case SET_ERROR_CHART:
       return {

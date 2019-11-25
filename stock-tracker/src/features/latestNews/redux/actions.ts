@@ -1,5 +1,6 @@
-import { SET_NEWS, SET_LOADING_NEWS, SET_ERROR_NEWS } from "./actionTypes";
+import { SET_NEWS, SET_ERROR_NEWS } from "./actionTypes";
 import { Action, ActionPayload } from "../../../types";
+import { SetSymbol } from "features/search/redux/actions";
 
 export interface NewsInterface {
   url: string;
@@ -9,7 +10,6 @@ export interface NewsInterface {
 }
 
 export type SetLatestNews = ActionPayload<typeof SET_NEWS, NewsInterface[]>;
-export type SetLatestNewsLoading = Action<typeof SET_LOADING_NEWS>;
 export type SetLatestNewsError = Action<typeof SET_ERROR_NEWS>;
 
 export const setLatestNewsAction = (
@@ -19,15 +19,8 @@ export const setLatestNewsAction = (
   payload: latestNews
 });
 
-export const setLoadingNewsAction = (): SetLatestNewsLoading => ({
-  type: SET_LOADING_NEWS
-});
-
 export const setErrorNewsAction = (): SetLatestNewsError => ({
   type: SET_ERROR_NEWS
 });
 
-export type LatestNewsActions =
-  | SetLatestNews
-  | SetLatestNewsLoading
-  | SetLatestNewsError;
+export type LatestNewsActions = SetLatestNews | SetSymbol | SetLatestNewsError;

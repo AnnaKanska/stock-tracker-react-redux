@@ -1,10 +1,6 @@
-import {
-  SET_CHART_DATA,
-  SET_CHART_TIME,
-  LOADING_CHART,
-  SET_ERROR_CHART
-} from "./actionTypes";
+import { SET_CHART_DATA, SET_CHART_TIME, SET_ERROR_CHART } from "./actionTypes";
 import { Action, ActionPayload } from "../../../types";
+import { SetSymbol } from "../../search/redux/actions";
 
 export interface ChartData {
   close: number;
@@ -13,7 +9,6 @@ export interface ChartData {
 
 export type SetChartData = ActionPayload<typeof SET_CHART_DATA, ChartData[]>;
 export type SetChartTime = ActionPayload<typeof SET_CHART_TIME, string>;
-export type SetChartLoading = Action<typeof LOADING_CHART>;
 export type SetChartError = Action<typeof SET_ERROR_CHART>;
 
 export const setChartDataAction = (chartData: ChartData[]): SetChartData => ({
@@ -26,10 +21,6 @@ export const setChartTimeAction = (chartTime: string): SetChartTime => ({
   payload: chartTime
 });
 
-export const setChartLoadingAction = (): SetChartLoading => ({
-  type: LOADING_CHART
-});
-
 export const setChartErrorAction = (): SetChartError => ({
   type: SET_ERROR_CHART
 });
@@ -37,5 +28,5 @@ export const setChartErrorAction = (): SetChartError => ({
 export type ChartActions =
   | SetChartData
   | SetChartTime
-  | SetChartLoading
+  | SetSymbol
   | SetChartError;

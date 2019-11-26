@@ -15,12 +15,7 @@ export const LatestNews = () => {
     <div className="news" key={index}>
       <p className={index === 0 ? "first_news news_headline" : "news_headline"}>
         {/* without rel tag, makes site vulnerable to phishing attacks as newly opened site gains read/write access to window.opener.location that can be changed and cause browser to go to new URL instead of your page */}
-        <a
-          data-testid="testHeadline"
-          rel="noopener noreferrer"
-          href={news.url}
-          target="_blank"
-        >
+        <a rel="noopener noreferrer" href={news.url} target="_blank">
           {news.headline}
         </a>
       </p>

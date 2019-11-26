@@ -9,7 +9,7 @@ export interface NewsState {
   error: boolean;
 }
 
-const initialState: NewsState = {
+export const initialState: NewsState = {
   latestNews: [],
   loading: false,
   error: false

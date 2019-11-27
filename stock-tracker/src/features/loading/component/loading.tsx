@@ -3,7 +3,7 @@ import "./loading.css";
 
 const Loading = () => {
   return (
-    <div>
+    <div role="loading-animation">
       <div className="lds-ripple">
         <div></div>
         <div></div>

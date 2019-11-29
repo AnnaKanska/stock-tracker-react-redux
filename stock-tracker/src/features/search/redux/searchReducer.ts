@@ -14,7 +14,7 @@ export interface SearchState {
   error: boolean;
 }
 
-export const initialState = {
+const initialState = {
   symbol: "",
   searchInput: "",
   suggestions: undefined,

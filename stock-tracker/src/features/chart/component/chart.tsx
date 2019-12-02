@@ -71,9 +71,11 @@ export const Chart = () => {
             <ChartButton current={current} range="5Y" onClick={onClick} />
             <ChartButton current={current} range="MAX" onClick={onClick} />
           </div>
-          <ResponsiveContainer className="responsive_chart">
+          <div style={{ width: "1000px", height: "200px" }}>
             <AreaChart
               data={chartData}
+              width={700}
+              height={500}
               margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
             >
               <CartesianGrid stroke="#f5f5f5" opacity="0.25" />
@@ -84,6 +86,7 @@ export const Chart = () => {
                 </linearGradient>
               </defs>
               <XAxis
+                data-testid="test"
                 interval="preserveStart"
                 tickFormatter={formatDate}
                 dataKey="date"
@@ -118,7 +121,7 @@ export const Chart = () => {
                 connectNulls
               />
             </AreaChart>
-          </ResponsiveContainer>
+          </div>
         </>
       )}
     </div>
